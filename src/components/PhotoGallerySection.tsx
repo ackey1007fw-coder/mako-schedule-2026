@@ -1,16 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Images, X } from "lucide-react";
 import { galleryPhotos } from "../data/photos";
 import { SectionHeader } from "./SectionHeader";
 
 const wrapIndex = (index: number) => (index + galleryPhotos.length) % galleryPhotos.length;
+const SWIPE_THRESHOLD_PX = 50;
 
 export function PhotoGallerySection() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const lastOpenedIndexRef = useRef<number | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
 
+  const openPhoto = useCallback((index: number) => {
+    lastOpenedIndexRef.current = index;
+    setSelectedIndex(index);
+  }, []);
   const closePhoto = useCallback(() => setSelectedIndex(null), []);
   const showPrevious = useCallback(() => {
     setSelectedIndex((current) => (current === null ? current : wrapIndex(current - 1)));
@@ -37,6 +45,29 @@ export function PhotoGallerySection() {
     };
   }, [selectedIndex]);
 
+  // モーダルを閉じたら、開くきっかけになったサムネイルへフォーカスを戻す。
+  useEffect(() => {
+    if (selectedIndex !== null) return;
+    const indexToFocus = lastOpenedIndexRef.current;
+    if (indexToFocus === null) return;
+    thumbnailRefs.current[indexToFocus]?.focus();
+    lastOpenedIndexRef.current = null;
+  }, [selectedIndex]);
+
+  const onTouchStart = (event: React.TouchEvent) => {
+    touchStartXRef.current = event.touches[0]?.clientX ?? null;
+  };
+  const onTouchEnd = (event: React.TouchEvent) => {
+    const startX = touchStartXRef.current;
+    const endX = event.changedTouches[0]?.clientX;
+    touchStartXRef.current = null;
+    if (startX === null || endX === undefined) return;
+    const delta = endX - startX;
+    if (Math.abs(delta) < SWIPE_THRESHOLD_PX) return;
+    if (delta > 0) showPrevious();
+    else showNext();
+  };
+
   if (galleryPhotos.length === 0) return null;
 
   const selectedPhoto = selectedIndex === null ? null : galleryPhotos[selectedIndex];
@@ -55,7 +86,10 @@ export function PhotoGallerySection() {
             <figure key={photo.src} className="mako-card overflow-hidden border-mako-ink/10 bg-mako-sand">
               <button
                 type="button"
-                onClick={() => setSelectedIndex(index)}
+                ref={(el) => {
+                  thumbnailRefs.current[index] = el;
+                }}
+                onClick={() => openPhoto(index)}
                 className="block w-full text-left"
                 aria-label={`${photo.alt}を大きく表示`}
               >
@@ -78,6 +112,8 @@ export function PhotoGallerySection() {
           role="dialog"
           aria-modal="true"
           aria-label="写真拡大表示"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
           <div className="mx-auto flex h-full max-w-5xl flex-col">
             <div className="flex items-center justify-between gap-3">
