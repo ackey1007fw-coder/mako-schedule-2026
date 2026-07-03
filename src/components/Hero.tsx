@@ -25,7 +25,7 @@ export function Hero({ socialLinks }: HeroProps) {
             src={profile.heroImage}
             alt={profile.name}
             fill
-            priority
+            loading="eager"
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="hidden object-cover object-[50%_20%] lg:block"
           />
