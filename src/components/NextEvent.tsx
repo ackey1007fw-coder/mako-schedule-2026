@@ -14,7 +14,7 @@ type NextEventProps = {
 export function NextEvent({ event }: NextEventProps) {
   if (!event) {
     return (
-      <section id="next" className="relative overflow-hidden bg-mako-sand py-16 sm:py-24">
+      <section id="next" className="scroll-mt-24 relative overflow-hidden bg-mako-sand py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             kicker="Next"
@@ -45,7 +45,7 @@ export function NextEvent({ event }: NextEventProps) {
   const ticketLink = event.links.find((link) => link.kind === "ticket") ?? event.links[0];
 
   return (
-    <section id="next" className="relative overflow-hidden bg-mako-sand py-16 sm:py-24">
+    <section id="next" className="scroll-mt-24 relative overflow-hidden bg-mako-sand py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader kicker="Next" title="次の予定" />
 
