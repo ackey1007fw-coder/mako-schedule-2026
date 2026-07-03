@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-mako-primary: #ff6b8a;
+  --color-mako-secondary: #00a6a6;
+  --color-mako-sand: #fff6ec;
+  --color-mako-sunset: #ffb347;
+  --color-mako-ink: #2b2b33;
+  --font-display: var(--font-mincho);
+  --font-sans: var(--font-sans-jp);
+}
+
+:root {
+  color: #2b2b33;
+  background: #fff6ec;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  overflow-x: hidden;
+  background: #fff6ec;
+  font-family: var(--font-sans-jp), ui-sans-serif, system-ui, "Yu Gothic", "Hiragino Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: #ffd7e0;
+  color: #2b2b33;
+}
+
+:where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid rgba(0, 166, 166, 0.9);
+  outline-offset: 2px;
+}
+
+.mako-card {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(43, 43, 51, 0.06);
+}
+
+.mako-card.shadow-paper {
+  box-shadow: 0 18px 50px rgba(43, 43, 51, 0.12);
+}
+
+.mako-card-interactive {
+  transition:
+    transform 280ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    box-shadow 280ms ease,
+    border-color 280ms ease;
+}
+
+@media (hover: hover) {
+  .mako-card-interactive:hover,
+  .photo-gallery-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(43, 43, 51, 0.13);
+  }
+}
+
+.mako-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-align: center;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.mako-button-primary {
+  border-color: #ff6b8a;
+  background: #ff6b8a;
+  color: #2b2b33;
+  box-shadow: 0 12px 24px rgba(255, 107, 138, 0.22);
+}
+
+.mako-button-secondary {
+  border-color: #00a6a6;
+  background: #00a6a6;
+  color: #2b2b33;
+  box-shadow: 0 12px 24px rgba(0, 166, 166, 0.2);
+}
+
+.mako-button-soft {
+  border-color: rgba(255, 107, 138, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  color: #2b2b33;
+}
+
+.mako-button-ghost {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+@media (hover: hover) {
+  .mako-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(43, 43, 51, 0.13);
+  }
+
+  .mako-button-primary:hover {
+    background: #ff4f74;
+  }
+
+  .mako-button-secondary:hover {
+    background: #00908f;
+  }
+
+  .mako-button-soft:hover {
+    border-color: #ff6b8a;
+    background: #fffafc;
+  }
+
+  .mako-button-ghost:hover {
+    background: rgba(255, 255, 255, 0.32);
+  }
+}
+
+.mako-skeleton {
+  background-image: linear-gradient(
+    100deg,
+    rgba(255, 107, 138, 0.1) 28%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 107, 138, 0.1) 72%
+  );
+  background-size: 200% 100%;
+  animation: mako-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes mako-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.quick-nav-link {
+  scroll-snap-align: start;
+}
+
+.quick-nav-scroll {
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+
+.quick-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
