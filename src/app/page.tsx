@@ -17,6 +17,8 @@ import { events } from "../data/events";
 import { socialLinks } from "../data/socialLinks";
 import { isEventPast, sortEventsAsc, sortEventsDesc } from "../lib/date";
 
+export const revalidate = 3600;
+
 export default function Home() {
   const now = new Date();
   const upcomingEvents = sortEventsAsc(events.filter((event) => !isEventPast(event, now)));

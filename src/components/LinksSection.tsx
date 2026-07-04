@@ -8,7 +8,7 @@ type LinksSectionProps = {
 
 export function LinksSection({ socialLinks }: LinksSectionProps) {
   return (
-    <section id="links" className="bg-white py-16 sm:py-24">
+    <section id="links" className="scroll-mt-24 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader kicker="Links" title="SNSリンク" />
 

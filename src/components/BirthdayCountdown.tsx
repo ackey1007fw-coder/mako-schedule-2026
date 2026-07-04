@@ -10,11 +10,13 @@ const SHOW_WITHIN_DAYS = 60;
 
 export function BirthdayCountdown() {
   const birthday = site.birthday;
+  const [mounted, setMounted] = useState(false);
   const [countdown, setCountdown] = useState(() =>
     birthday ? getBirthdayCountdown(birthday) : null,
   );
 
   useEffect(() => {
+    setMounted(true);
     if (!birthday) return;
     const timer = window.setInterval(() => {
       setCountdown(getBirthdayCountdown(birthday));
@@ -28,11 +30,13 @@ export function BirthdayCountdown() {
   const isApproaching = countdown.isBirthdayToday || countdown.days <= SHOW_WITHIN_DAYS;
   if (!isApproaching) return null;
 
+  // マウント前はサーバー描画時刻と初回クライアント描画時刻がズレるため、
+  // 秒単位まで含む数字部分だけプレースホルダーにしてhydration不整合を避ける。
   const values = [
-    { label: "日", value: countdown.days },
-    { label: "時間", value: countdown.hours },
-    { label: "分", value: countdown.minutes },
-    { label: "秒", value: countdown.seconds },
+    { label: "日", value: mounted ? countdown.days : undefined },
+    { label: "時間", value: mounted ? countdown.hours : undefined },
+    { label: "分", value: mounted ? countdown.minutes : undefined },
+    { label: "秒", value: mounted ? countdown.seconds : undefined },
   ];
 
   return (
@@ -52,7 +56,7 @@ export function BirthdayCountdown() {
             {values.map((item) => (
               <div key={item.label} className="rounded-xl border border-mako-ink/10 bg-mako-sand p-4 text-center">
                 <span className="block font-display text-4xl tabular-nums text-mako-ink sm:text-5xl">
-                  {String(item.value).padStart(2, "0")}
+                  {item.value === undefined ? "--" : String(item.value).padStart(2, "0")}
                 </span>
                 <div className="mt-2 text-xs font-bold text-mako-ink/55">{item.label}</div>
               </div>
