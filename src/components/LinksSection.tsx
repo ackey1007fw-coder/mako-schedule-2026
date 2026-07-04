@@ -30,7 +30,7 @@ export function LinksSection({ socialLinks }: LinksSectionProps) {
               </span>
               <span>
                 <span className="block font-display text-2xl text-mako-ink">{link.label}</span>
-                <span className="mt-1 block text-sm font-bold text-mako-secondary">{link.handle}</span>
+                <span className="mt-1 block text-sm font-bold text-mako-secondary-ink">{link.handle}</span>
                 <span className="mt-3 block text-sm leading-6 text-mako-ink/62">{link.description}</span>
               </span>
             </a>

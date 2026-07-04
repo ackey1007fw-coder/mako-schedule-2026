@@ -3,6 +3,10 @@
 @theme inline {
   --color-mako-primary: #ff6b8a;
   --color-mako-secondary: #00a6a6;
+  /* primary/secondaryは白・sand背景だと約2.5〜3.0:1しかコントラストが出ないため、
+     本文として読ませるテキストには濃いめのこちらを使う（アイコン・装飾・暗い背景上は元の色のまま）。 */
+  --color-mako-primary-ink: #c2405f;
+  --color-mako-secondary-ink: #007a7a;
   --color-mako-sand: #fff6ec;
   --color-mako-sunset: #ffb347;
   --color-mako-ink: #2b2b33;

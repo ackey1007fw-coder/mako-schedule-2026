@@ -48,8 +48,8 @@ export function BirthdayCountdown() {
           copy={`${countdown.targetLabel}まで、あと少し。SNSで一緒にお祝いしよう。`}
         />
         <div className="mako-card border border-mako-primary/30 bg-white p-5 shadow-paper sm:p-6">
-          <div className="mb-5 flex items-center gap-3 text-mako-primary">
-            <Gift className="h-5 w-5" aria-hidden="true" />
+          <div className="mb-5 flex items-center gap-3 text-mako-primary-ink">
+            <Gift className="h-5 w-5 text-mako-primary" aria-hidden="true" />
             <p className="text-sm font-bold">{countdown.targetLabel}</p>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">

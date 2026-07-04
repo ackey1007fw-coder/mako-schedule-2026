@@ -43,8 +43,9 @@ function ClipCard({ clip }: { clip: Clip }) {
       >
         <video
           ref={videoRef}
-          className="h-full w-full object-cover"
+          className="aspect-[9/16] h-full w-full object-cover"
           src={clip.src}
+          poster={clip.poster}
           muted
           loop
           playsInline
@@ -77,7 +78,7 @@ export function ClipSection() {
     <section id="clips" className="scroll-mt-24 bg-mako-sand px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <div className="mb-6 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-mako-secondary">Short Movie</p>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-mako-secondary-ink">Short Movie</p>
           <h2 className="mt-1 font-display text-2xl text-mako-ink sm:text-3xl">動くまこ</h2>
           <p className="mt-2 text-sm text-mako-ink/60">
             音声はオフで流しているので、本編はタップして元の投稿でどうぞ。

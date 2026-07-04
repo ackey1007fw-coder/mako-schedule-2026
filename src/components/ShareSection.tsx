@@ -36,7 +36,7 @@ export function ShareSection() {
   return (
     <section id="share" className="scroll-mt-24 bg-mako-sand px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl border-y border-mako-primary/25 py-10 text-center">
-        <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase text-mako-secondary">
+        <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase text-mako-secondary-ink">
           <Share2 className="h-4 w-4" aria-hidden="true" />
           Share
         </p>

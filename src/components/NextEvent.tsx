@@ -22,7 +22,7 @@ export function NextEvent({ event }: NextEventProps) {
             copy="次に会えるのはいつ？決まり次第ここに掲載します。最新情報はSNSでチェックできます。"
           />
           <article className="mako-card border border-mako-primary/40 bg-white p-8 text-center sm:p-12">
-            <p className="inline-flex items-center gap-2 text-xs font-black uppercase text-mako-primary">
+            <p className="inline-flex items-center gap-2 text-xs font-black uppercase text-mako-primary-ink">
               <Clock3 className="h-4 w-4" aria-hidden="true" />
               Coming soon
             </p>
@@ -49,7 +49,10 @@ export function NextEvent({ event }: NextEventProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader kicker="Next" title="次の予定" />
 
-        <article className="mako-card grid overflow-hidden border border-mako-primary/40 bg-white lg:grid-cols-[1.12fr_0.88fr]">
+        <article
+          id={`event-${event.id}`}
+          className="mako-card scroll-mt-24 grid overflow-hidden border border-mako-primary/40 bg-white lg:grid-cols-[1.12fr_0.88fr]"
+        >
           {event.image && (
             <div className="relative overflow-hidden bg-mako-ink lg:min-h-[420px]">
               <Image
@@ -83,7 +86,7 @@ export function NextEvent({ event }: NextEventProps) {
                   <h3 className="font-display text-3xl leading-tight text-mako-ink sm:text-4xl">
                     {event.title}
                   </h3>
-                  <p className="mt-4 flex gap-2 text-sm font-bold text-mako-primary">
+                  <p className="mt-4 flex gap-2 text-sm font-bold text-mako-primary-ink">
                     <Clock3 className="h-4 w-4 shrink-0" aria-hidden="true" />
                     {event.displayDate}
                   </p>
