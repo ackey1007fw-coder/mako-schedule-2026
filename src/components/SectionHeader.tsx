@@ -8,7 +8,7 @@ type SectionHeaderProps = {
 export function SectionHeader({ kicker, title, copy, align = "left" }: SectionHeaderProps) {
   return (
     <div className={`mb-8 max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
-      <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-mako-secondary">
+      <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-mako-secondary-ink">
         {kicker}
       </p>
       <h2 className="font-display text-3xl leading-tight text-mako-ink sm:text-4xl">{title}</h2>

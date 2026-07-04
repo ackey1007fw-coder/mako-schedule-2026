@@ -9,7 +9,8 @@ type ScheduleSectionProps = {
 };
 
 export function ScheduleSection({ upcomingEvents, pastEvents }: ScheduleSectionProps) {
-  const nextId = upcomingEvents[0]?.id;
+  // 直近の1件は直前の NextEvent セクションで既に大きく紹介済みのため、ここでは重複させない。
+  const restUpcomingEvents = upcomingEvents.slice(1);
 
   return (
     <section id="schedule" className="scroll-mt-24 bg-white py-16 sm:py-24">
@@ -26,20 +27,26 @@ export function ScheduleSection({ upcomingEvents, pastEvents }: ScheduleSectionP
           <div className="mb-12">
             <div className="mb-5 flex items-end justify-between gap-4 border-b border-mako-primary/25 pb-4">
               <div>
-                <p className="text-xs font-bold uppercase text-mako-secondary">Upcoming</p>
+                <p className="text-xs font-bold uppercase text-mako-secondary-ink">Upcoming</p>
                 <h3 className="mt-1 font-display text-3xl text-mako-ink">今後の予定</h3>
               </div>
               <span className="rounded-full border border-mako-ink/15 bg-mako-sand px-3 py-2 text-xs font-bold text-mako-ink/62">
                 {upcomingEvents.length}件
               </span>
             </div>
-            <div className="grid gap-5">
-              {upcomingEvents.map((event) => (
-                <div key={event.id} id={`event-${event.id}`} className="scroll-mt-24">
-                  <EventCard event={event} isNext={event.id === nextId} />
-                </div>
-              ))}
-            </div>
+            {restUpcomingEvents.length > 0 ? (
+              <div className="grid gap-5">
+                {restUpcomingEvents.map((event) => (
+                  <div key={event.id} id={`event-${event.id}`} className="scroll-mt-24">
+                    <EventCard event={event} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="rounded-xl border border-dashed border-mako-ink/15 bg-mako-sand px-5 py-6 text-sm text-mako-ink/62">
+                直近の予定は、このすぐ上の「次の予定」でご紹介しています。
+              </p>
+            )}
           </div>
         )}
 
@@ -47,7 +54,7 @@ export function ScheduleSection({ upcomingEvents, pastEvents }: ScheduleSectionP
           <details className="group border-y border-mako-ink/10">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 marker:hidden">
               <div>
-                <p className="text-xs font-bold uppercase text-mako-secondary">Archive</p>
+                <p className="text-xs font-bold uppercase text-mako-secondary-ink">Archive</p>
                 <h3 className="mt-1 font-display text-3xl text-mako-ink">終了済みイベント</h3>
               </div>
               <span className="flex shrink-0 items-center gap-2 rounded-full border border-mako-ink/15 bg-mako-sand px-3 py-2 text-xs font-bold text-mako-ink/62">

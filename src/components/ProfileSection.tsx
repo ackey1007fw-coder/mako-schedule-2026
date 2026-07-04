@@ -37,7 +37,7 @@ export function ProfileSection() {
             {profile.facts.length > 0 ? (
               profile.facts.map((fact) => (
                 <div key={fact.label} className="mako-card grid grid-cols-[88px_1fr] border-mako-ink/10 bg-white">
-                  <div className="border-r border-mako-ink/10 bg-mako-sand px-4 py-4 text-xs font-bold text-mako-primary">
+                  <div className="border-r border-mako-ink/10 bg-mako-sand px-4 py-4 text-xs font-bold text-mako-primary-ink">
                     {fact.label}
                   </div>
                   <div className="px-4 py-4 text-sm font-semibold leading-7 text-mako-ink/75">

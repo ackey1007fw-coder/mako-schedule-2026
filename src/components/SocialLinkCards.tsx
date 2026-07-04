@@ -27,7 +27,7 @@ export function SocialLinkCards({ socialLinks }: SocialLinkCardsProps) {
             </span>
             <span className="min-w-0 flex-1">
               <span className="block font-display text-xl text-mako-ink">{link.label}</span>
-              <span className="block truncate text-sm font-semibold text-mako-secondary">
+              <span className="block truncate text-sm font-semibold text-mako-secondary-ink">
                 {link.handle}
               </span>
             </span>

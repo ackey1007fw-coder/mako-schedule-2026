@@ -32,7 +32,7 @@ export function Hero({ socialLinks }: HeroProps) {
         </div>
 
         <div className="order-2 flex flex-col justify-center px-4 py-10 sm:px-6 sm:py-14 lg:order-1 lg:px-10 lg:py-20">
-          <p className="mb-5 inline-flex self-start rounded-full border border-mako-primary/40 bg-white/70 px-3 py-2 text-xs font-bold uppercase tracking-[0.14em] text-mako-primary backdrop-blur">
+          <p className="mb-5 inline-flex self-start rounded-full border border-mako-primary/40 bg-white/70 px-3 py-2 text-xs font-bold uppercase tracking-[0.14em] text-mako-primary-ink backdrop-blur">
             MAKO Schedule 2026
           </p>
           <h1 className="font-display text-6xl leading-[0.96] text-mako-ink sm:text-7xl">

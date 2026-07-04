@@ -47,6 +47,7 @@ export type NewsItem = {
 
 export type Clip = {
   src: string;
+  poster?: string; // 動画1フレーム目の画像(/images/clips/xxx.jpg)。読み込み中の黒い箱を防ぐ
   platform: "TikTok" | "Instagram";
   title: string;
   caption: string;

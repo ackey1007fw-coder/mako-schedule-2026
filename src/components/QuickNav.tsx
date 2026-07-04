@@ -62,7 +62,7 @@ export function QuickNav() {
               data-nav-id={id}
               className={`quick-nav-link inline-flex min-h-10 items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold transition-colors sm:text-sm ${
                 active === id
-                  ? "border-mako-primary/60 bg-white text-mako-primary"
+                  ? "border-mako-primary/60 bg-white text-mako-primary-ink"
                   : "border-mako-ink/15 bg-mako-sand text-mako-ink/72 hover:border-mako-primary/60 hover:bg-white"
               }`}
             >
