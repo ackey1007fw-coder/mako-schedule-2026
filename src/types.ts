@@ -11,7 +11,11 @@ export type ScheduleEvent = {
   title: string;
   shortTitle: string;
   category: EventCategory;
+  /** この予定をサイトへ掲載した日。日付のみの場合はPortal FeedでJST日付として扱う。 */
+  listedAt: string;
+  /** 実際の開催開始日時（offset付きISO datetime）。 */
   startAt: string;
+  /** 実際の開催終了日時。UIの終了判定・カレンダー・JSON-LDでも同じ意味で使用する。 */
   endAt?: string;
   dates?: string[];
   displayDate: string;
