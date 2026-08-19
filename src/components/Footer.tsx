@@ -2,6 +2,8 @@ import { profile } from "../data/profile";
 import { site } from "../data/site";
 import type { SocialLink } from "../types";
 
+const OUEN_ARCHIVE_URL = "https://ouen-archive-564c.vercel.app/";
+
 type FooterProps = {
   socialLinks: SocialLink[];
 };
@@ -38,6 +40,19 @@ export function Footer({ socialLinks }: FooterProps) {
               ))}
             </div>
           </div>
+        </div>
+
+        <div className="mt-10">
+          <a
+            href={OUEN_ARCHIVE_URL}
+            className="inline-flex min-h-[44px] items-center gap-1.5 text-xs text-white/60 underline decoration-white/30 underline-offset-4 transition hover:text-white hover:decoration-mako-primary"
+          >
+            <span aria-hidden="true">←</span>
+            応援アーカイブへ戻る
+          </a>
+          <p className="mt-1 text-[11px] text-white/40">
+            5つの応援サイトをつなぐ非公式ポータル
+          </p>
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
