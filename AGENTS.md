@@ -44,7 +44,7 @@
 - 実データ投入・公開判断に必要な初期仕様の未回答項目は、本人確認記録と現行コードを照合して項目ごとに解決する。参照できない仕様書の回答を捏造しない。
 - 私的DM、非公開の人間関係、私的住所・連絡先・家族情報、認証情報を公開リポジトリへ書かない。制作者の職業を特定する紹介も避ける。
 
-## SNS・素材の追加手順
+## SNS 投稿を追加する手順
 
 1. 提供された画像・依頼者指定のDrive原本を使い、本人性と掲載範囲を確認する。
 2. `public/images/gallery/g{次番号}.jpg` に新規保存する。現在の最大番号と同名衝突を確認する。動画は `public/videos/`。
@@ -67,7 +67,9 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
-git diff --check
+git diff --check                      # 未ステージの変更
+git diff --cached --check             # ステージ済みの変更
+git diff --check origin/main...HEAD   # コミット済みのPR差分（最新のbaseを取得後）
 ```
 
 - `npm test` はportal feedと親ポータルへの戻り導線を検証する。news / eventsが空なら空のfeedが正しい。表示のためのダミー情報を作らない。
