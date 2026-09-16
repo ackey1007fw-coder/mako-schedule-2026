@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.siteUrl),
   title: `${profile.name}（${profile.romaji}）スケジュール 2026 | Instagram・TikTok`,
   description,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: site.siteName,
     description,
