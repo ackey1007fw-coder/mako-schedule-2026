@@ -54,3 +54,22 @@ test("portal feed and person data are untouched", () => {
   assert.ok(!read("src/data/profile.ts").includes("ouen-archive"));
   assert.ok(!read("src/data/socialLinks.ts").includes("ouen-archive"));
 });
+
+
+test("news internal destination stays in the current tab", () => {
+  const newsBar = read("src/components/NewsBar.tsx");
+  assert.ok(newsBar.includes('destination.origin !== new URL(site.siteUrl).origin'));
+  assert.ok(newsBar.includes('href={href}'));
+  assert.ok(newsBar.includes('target={external ? "_blank" : undefined}'));
+  assert.ok(newsBar.includes('rel={external ? "noopener noreferrer" : undefined}'));
+  assert.ok(!newsBar.includes('target="_blank"'));
+});
+
+
+test("news reveals an archived event disclosure before fragment navigation", () => {
+  const newsBar = read("src/components/NewsBar.tsx");
+  assert.ok(newsBar.includes('onClick={() => {'));
+  assert.ok(newsBar.includes('if (external || !destination?.hash) return;'));
+  assert.ok(newsBar.includes('document.getElementById(decodeURIComponent(destination.hash.slice(1)))'));
+  assert.ok(newsBar.includes('if (parent instanceof HTMLDetailsElement) parent.open = true;'));
+});

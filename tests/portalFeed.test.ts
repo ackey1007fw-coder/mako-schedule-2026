@@ -4,6 +4,10 @@ import test from "node:test";
 import type { SiteConfig } from "../src/data/site";
 import { buildPortalFeed, type PortalFeedItem } from "../src/lib/portalFeed";
 import type { NewsItem, ScheduleEvent } from "../src/types";
+import { events } from "../src/data/events";
+import { news } from "../src/data/news";
+import { isEventPast } from "../src/lib/date";
+import { googleCalendarUrl } from "../src/lib/share";
 
 const siteConfig: Pick<SiteConfig, "siteName" | "siteUrl"> = {
   siteName: "MAKO Schedule 2026",
@@ -240,4 +244,30 @@ test("rejects external image URLs", () => {
     () => build([], [eventItem]),
     /events\[0\]\.image must use the site origin https:\/\/mako-schedule-2026\.vercel\.app/,
   );
+});
+
+
+test("calendar preserves the published LEGO reporter interval", () => {
+  const event = events.find(({ id }) => id === "showroom-legoland-reporter-20260914");
+  assert.ok(event);
+  const url = new URL(googleCalendarUrl(event));
+  assert.equal(url.searchParams.get("dates"), "20260914T090000Z/20260920T125959Z");
+  assert.equal(isEventPast(event, new Date("2026-09-20T21:59:59+09:00")), false);
+  assert.equal(isEventPast(event, new Date("2026-09-20T22:00:00+09:00")), true);
+  assert.ok(!event.badges.includes("参加中"));
+  assert.ok(event.summary.includes("9/19確認時点"));
+});
+
+test("Sep 19 notice has a working local destination without a SHOWROOM link", () => {
+  const notice = news.find(({ date }) => date === "2026.9.19");
+  assert.ok(notice?.url);
+  assert.ok(notice.text.startsWith("13:00"));
+  const url = new URL(notice.url);
+  assert.equal(url.origin, siteConfig.siteUrl);
+  assert.equal(url.hash, "#event-showroom-legoland-reporter-20260914");
+  assert.ok(events.some(({ id }) => url.hash === "#event-" + id));
+  assert.ok(events.every(({ links }) => links.every(({ url }) => !/showroom-live|x\.com|twitter\.com/.test(url))));
+  const event = events.find(({ id }) => url.hash === "#event-" + id);
+  assert.ok(event);
+  assert.equal(build([notice], [event], new Date("2026-09-19T08:00:00+09:00")).items.length, 2);
 });
