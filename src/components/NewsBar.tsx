@@ -3,12 +3,18 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Megaphone } from "lucide-react";
 import { news } from "../data/news";
+import { site } from "../data/site";
 
 // 最新のお知らせを1件、トップのスリムなバーで表示する。
 // ヘッダー＋ニュースバー＋QuickNavのsticky3段が狭い画面を圧迫しないよう、
 // 少しでもスクロールしたら畳み、ページ上端に戻ったら再表示する。
 export function NewsBar() {
   const latest = news[0];
+  const destination = latest?.url ? new URL(latest.url, site.siteUrl) : null;
+  const external = destination !== null && destination.origin !== new URL(site.siteUrl).origin;
+  const href = destination
+    ? external ? destination.href : `${destination.pathname}${destination.search}${destination.hash}`
+    : undefined;
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -28,9 +34,9 @@ export function NewsBar() {
       }`}
     >
       <a
-        href={latest.url}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
         tabIndex={collapsed ? -1 : undefined}
         aria-hidden={collapsed}
         className="group block border-b border-mako-ink/10 bg-white"
