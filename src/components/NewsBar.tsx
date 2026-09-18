@@ -35,6 +35,14 @@ export function NewsBar() {
     >
       <a
         href={href}
+        onClick={() => {
+          if (external || !destination?.hash) return;
+          const target = document.getElementById(decodeURIComponent(destination.hash.slice(1)));
+          // Reveal archived events before the browser scrolls to the fragment.
+          for (let parent = target?.parentElement; parent; parent = parent.parentElement) {
+            if (parent instanceof HTMLDetailsElement) parent.open = true;
+          }
+        }}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
         tabIndex={collapsed ? -1 : undefined}
