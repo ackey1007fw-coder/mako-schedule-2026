@@ -5,6 +5,7 @@ export const news: NewsItem[] = [
   {
     date: "2026.9.19",
     label: "配信予定",
-    text: "レゴランド®・ジャパン 地上波TVリポーターオーディション参加中。9/19は13:00〜配信予定です。イベントは9/20 21:59まで。",
+    text: "13:00〜配信予定（9/19）。レゴランド®・ジャパン 地上波TVリポーターオーディションは9/20 21:59まで。",
+    url: "https://mako-schedule-2026.vercel.app/#event-showroom-legoland-reporter-20260914",
   },
 ];

@@ -13,8 +13,8 @@ export const events: ScheduleEvent[] = [
     endAt: "2026-09-20T21:59:59+09:00",
     displayDate: "2026年9月14日（月）18:00〜9月20日（日）21:59",
     summary:
-      "MAKOさんがSHOWROOMの「人気テーマパーク『レゴランド®・ジャパン』を盛り上げよう！地上波TVリポーター」SR枠に参加中。本人プロフィールでは、前回最終面接まで進んだ企画へのリベンジとして、今回はSR枠1位を目標に掲げています。",
-    badges: ["SHOWROOM", "地上波TVリポーター", "参加中"],
+      "MAKOさんがレゴランド®・ジャパンを紹介する地上波TVリポーターオーディションのSR枠に参加。SR枠1位を目標にした再挑戦です。9/19（土）は13:00から配信予定と案内されています（9/19確認時点）。",
+    badges: ["SHOWROOM", "地上波TVリポーター", "オーディション"],
     links: [],
     isImportant: true,
     isNextFocus: true,

@@ -7,11 +7,8 @@ const toCalDate = (iso: string) =>
   new Date(iso).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 
 export const googleCalendarUrl = (event: ScheduleEvent) => {
-  const startMs = new Date(event.startAt).getTime();
-  let endIso = event.endAt ?? event.startAt;
-  if (new Date(endIso).getTime() - startMs > 24 * 3600 * 1000) {
-    endIso = new Date(startMs + 2 * 3600 * 1000).toISOString();
-  }
+  // Keep the published interval, including multi-day events.
+  const endIso = event.endAt ?? event.startAt;
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: event.title,
